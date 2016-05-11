@@ -1,0 +1,17 @@
+{
+    "contents" : "Package: Temp2\nType: Package\nTitle: What the Package Does (Title Case)\nVersion: 0.1\nDate: 2016-05-11\nAuthor: Who wrote it\nMaintainer: Who to complain to <yourfault@somewhere.net>\nDescription: More about what it does (maybe more than one line)\nLicense: What license is it under?\nLazyData: TRUE",
+    "created" : 1462959931595.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2865194722",
+    "id" : "86B8FA18",
+    "lastKnownWriteTime" : 1462959139,
+    "path" : "~/Temp2/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "dcf"
+}
