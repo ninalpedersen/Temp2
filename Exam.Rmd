@@ -1,0 +1,12 @@
+---
+title: "Exam"
+output: html_document
+---
+
+```{r}
+#You will need the packages devtools and roxygen2
+install.packages("devtools")
+library(devtools)
+
+```
+
