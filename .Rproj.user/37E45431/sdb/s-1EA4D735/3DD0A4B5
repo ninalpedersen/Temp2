@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @export\n#' @return Goodness of fit value\n#' @title Chi Probability\n#' @usage chi.GOF(x,p = 1/length(x))\n#'\n#' @keywords goodness of fit chi\n#'\n#' @description This function computes the chi squared goodness of fit.\n#'\n#' @param x categorical variable\n#' @param p expected probability\n#'\n#' @author Nina Louise Pedersen \\cr\n#' Institute of Mathematics and Computer Science (IMADA) \\cr\n#' University of Sourthern Denmark, (SDU) \\cr\n#' \\email{npede14@student.sdu.dk} \\cr\n#'\n#' @examples\n#' chi.GOF(cars$speed)\n\n\nchi.GOF <- function(x,p = 1/length(x)){\n\n  # =====================================================\n  if(missing(x)){\n    stop(\"x is missing\")\n  }\n  if(missing(p)){\n    warning(\"p is missing, default is set to uniform distributed\")\n    p = rep(1/length(x),length(x))\n  }\n  if(!(is.numeric(x))){\n    stop(\"x must be numeric\")\n  }\n  if(!(is.numeric(p))){\n    stop(\"p must be numeric\")\n  }\n\n  if(length(p)==1){\n    if(!(p*length(x) == 1)){\n      stop(\"the expected does not give 100%.\")\n    }\n  }\n  else{\n    if(!(sum(p)==1)){\n        stop(\"the expected does not give 100%\")\n    }\n  }\n  if(!(length(p) == length(x))){\n    stop(\"p and x must have the same length\")\n  }\n  # =====================================================\n\n  E <- p*sum(x)\n  Q <- sum((x-E)^2/E)\n  return(Q)\n}\n\n",
+    "created" : 1465514489974.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2156381108",
+    "id" : "3DD0A4B5",
+    "lastKnownWriteTime" : 1465514534,
+    "last_content_update" : 1465514773309,
+    "path" : "~/Temp2/R/chi.GOF.R",
+    "project_path" : "R/chi.GOF.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

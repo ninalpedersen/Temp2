@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @export\n#' @return Stationary probabilities for each state\n#' @title Markov Chain\n#' @usage MarkovChain(p,k,n)\n#'\n#' @keywords stationary markov chain\n#'\n#' @description This function simulates the stationary probabilities from a transition probability matrix.\n#'\n#' @param p transition probability matrix\n#' @param k integer indicating the initial state of the chain\n#' @param n number of simulated steps\n#'\n#' @author Nina Louise Pedersen \\cr\n#' Institute of Mathematics and Computer Science (IMADA) \\cr\n#' University of Sourthern Denmark, (SDU) \\cr\n#' \\email{npede14@student.sdu.dk} \\cr\n#'\n#' @examples\n#' MarkovChain(matrix(c(.5,.5,.5,.5),ncol=2,byrow=TRUE),1,1000)\n\nMarkovChain <- function(p,k,n){\n\n  # =====================================================\n\n  if(missing(p)){\n    stop(\"Parameter p is missing.\")\n  }\n  if(missing(k)){\n    stop(\"Parameter k is missing.\")\n  }\n  if(missing(n)){\n    stop(\"Parameter n is missing.\")\n  }\n  if(!(dim(p)[1] == dim(p)[2])){\n    stop(\"Matrix p must be a n by n matrix.\")\n  }\n  if(!(k == as.integer(k))){\n    stop(\"k must be an integer.\")\n  }\n  if(!(n == as.integer(n))){\n    stop(\"n must be an integer.\")\n  }\n  if(n == TRUE){\n    warning(\"n set as 'TRUE' is the same as setting n = 1\")\n  }\n  if(n == FALSE){\n    warning(\"n set as 'FALSE' is the same as setting n = 0\")\n  }\n  if(k > dim(p)[1]){\n    stop(\"k larger than dimension of matrix\")\n  }\n\n  # =====================================================\n\n  state <- rep(0,dim(p)[1])\n  state[k] <- 1\n  for(i in 1:n){\n    state <- state %*% p\n  }\n  return(state)\n}\n",
+    "created" : 1465289979563.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3954838071",
+    "id" : "757B451D",
+    "lastKnownWriteTime" : 1465514414,
+    "last_content_update" : 1465514414500,
+    "path" : "~/Temp2/R/MarkovChain.R",
+    "project_path" : "R/MarkovChain.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

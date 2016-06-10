@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @export\n#' @return Return, depending on input, either the density in a point or the bandwidth and\n#' a table of densities estimated at minimum, 1st quartile, median, mean, 3rd quartile, maximum.\n#' @title Density estimator\n#' @usage Density(x,d,h,method = \"naive\")\n#'\n#' @description This function estimates the density of the given data.\n#'\n#' @param x numeric variable\n#' @param d point you are evaluating to obtain its density\n#' @param h bandwidth\n#' @param method method for estimating the density. Is either \"naive\" or \"kernel\". Set default as \"naive\".\n#'\n#' @author Nina Louise Pedersen \\cr\n#' Institute of Mathematics and Computer Science (IMADA) \\cr\n#' University of Sourthern Denmark, (SDU) \\cr\n#' \\email{npede14@student.sdu.dk} \\cr\n#'\n#' @examples\n#' Density(cars$speed,3,0.33,method = \"kernel\")\n#'\n\nDensity <- function(x, d, h, method = \"naive\"){\n\n  # =====================================================\n  if(method != \"naive\" && method != \"kernel\"){\n    stop(\"Method must be either 'naive' or 'kernel'\")\n  }\n  if(!is.numeric(x)){\n    stop(\"x must be numeric\")\n  }\n  if(!missing(d)){\n    if(!is.numeric(d)){\n      stop(\"d must be numeric \")\n    }\n  }\n  if(!missing(h)){\n    if(!is.numeric(h)){\n      stop(\"h must be numeric\")\n    }\n  }\n\n  # =====================================================\n\n  if(method == \"naive\"){\n    if(missing(h)){\n      R <- max(x)-min(x) # Sample range\n      h <- R/(1+log2(length(x))) # Optimal width by Sturges\n    }\n    if(missing(d)){\n      point <- c(min(x),quantile(x,.25),quantile(x,.50),mean(x),quantile(x,.75),max(x))\n      point.density <- c(Density(x, point[1], h),Density(x, point[2], h),Density(x, point[3], h),Density(x, point[4], h),Density(x, point[5], h),Density(x, point[6], h))\n      f.d <- data.frame(point,point.density)\n      rownames(f.d) <- c(\"Min:\", \"1st Quartile:\", \"Median:\", \"Mean:\", \"3rd Quartile:\", \"Max:\")\n      colnames(f.d) <- c(\"x\",\"y\")\n      cat(\"Bandwidth:\", h, \"\\n\")\n    }\n\n    else{\n      w <- rep(0,length(x))\n      for(i in 1:length(x)){\n        t <- (d-x[i])/h\n        if(abs(t)<1){\n          w[i] <- 1/2\n        }\n      }\n      f.d <- (1/length(x))*sum((1/h)*w)\n    }\n  }\n  #Else method is kernel\n  else{\n    if(missing(h)){\n      h = 0.9*sd(x)*length(x)^(-1/5) # Optimal width by Silverman\n    }\n    if(missing(d)){\n      point <- c(min(x),quantile(x,.25),quantile(x,.50),mean(x),quantile(x,.75),max(x))\n      point.density <- c(Density(x, point[1], h, method = \"kernel\"),Density(x, point[2], h, method = \"kernel\"),Density(x, point[3], h, method = \"kernel\"),Density(x, point[4], h, method = \"kernel\"),Density(x, point[5], h, method = \"kernel\"),Density(x, point[6], h, method = \"kernel\"))\n      f.d <- data.frame(point,point.density)\n      row.names(f.d) <- c(\"Min:\", \"1st Quartile:\", \"Median:\", \"Mean:\", \"3rd Quartile:\", \"Max:\")\n      colnames(f.d) <- c(\"x\",\"y\")\n      cat(\"Bandwidth:\", h, \"\\n\")\n    }\n    else{\n      w <- rep(0,length(x))\n      for(i in 1:length(x)){\n        w[i] <- 1/(sqrt(2*pi))*exp((-1/2)*((d-x[i])/h)^2)\n      }\n      f.d <- (1/length(x))*sum(1/h*w)\n    }\n  }\n  return(f.d)\n}\n\n\n",
+    "created" : 1465300199911.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2435281972",
+    "id" : "477134BE",
+    "lastKnownWriteTime" : 1465514087,
+    "last_content_update" : 1465514087112,
+    "path" : "~/Temp2/R/Density.R",
+    "project_path" : "R/Density.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @export\n#' @return Density plot\n#' @title Density estimation plot\n#' @usage Density.plot(x,n = 500,method,from,to)\n#'\n#' @description This function estimates the density of the given data.\n#'\n#' @param x numeric variable\n#' @param n point you are evaluating to obtain its density\n#' @param method method for estimating the density. Is either \"naive\" or \"kernel\". Set default as \"naive\".\n#' @param from r\n#' @param to r\n#'\n#' @author Nina Louise Pedersen \\cr\n#' Institute of Mathematics and Computer Science (IMADA) \\cr\n#' University of Sourthern Denmark, (SDU) \\cr\n#' \\email{npede14@student.sdu.dk} \\cr\n#'\n#' @examples\n#' Density.plot(cars$speed,n = 500,method = \"kernel\")\n\nDensity.plot <- function(x, n = 500, method =\"naive\", from, to){\n\n  # =====================================================\n  if(method != \"naive\" && method != \"kernel\"){\n    stop(\"Method must be either 'naive' or 'kernel'\")\n  }\n  if(!is.numeric(x)){\n    stop(\"x must be a numeric\")\n  }\n  if(is.integer(n) || n <= 0){\n    stop(\"n must be a positive integer\")\n  }\n  if(missing(from)){\n    from <- min(x)-1/3*sd(x)\n  }\n  if(missing(to)){\n    to <- max(x)+1/3*sd(x)\n  }\n\n\n  # =====================================================\n\n  if(method == \"naive\"){\n    X <- rep(0,n)\n    Y <- rep(0,n)\n    j <- 1\n    for(i in seq(from = from, to = to, by = (to-from)/(n-1))){\n      X[j] <- i\n      Y[j] <- Density(x, i, method = \"naive\")\n      j <- j + 1\n    }\n    plot(X,Y, type = \"s\")\n  }\n  #if method is kernel\n  else{\n    X <- rep(0,n)\n    Y <- rep(0,n)\n    j <- 1\n    for(i in seq(from = from, to = to, by = (to-from)/(n-1))){\n      X[j] <- i\n      Y[j] <- Density(x, i, method = \"kernel\")\n      j <- j + 1\n    }\n    plot(X,Y, type = \"l\")\n  }\n}\n",
+    "created" : 1465308005070.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3917578464",
+    "id" : "4965AC03",
+    "lastKnownWriteTime" : 1465514192,
+    "last_content_update" : 1465514192856,
+    "path" : "~/Temp2/R/Density.plot.R",
+    "project_path" : "R/Density.plot.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

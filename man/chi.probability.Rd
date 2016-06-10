@@ -2,8 +2,34 @@
 % Please edit documentation in R/chi.probability.R
 \name{chi.probability}
 \alias{chi.probability}
-\title{This is the title of the package}
+\title{Chi Probability}
 \usage{
 chi.probability(x, df = 1, n = 1)
 }
+\arguments{
+\item{x}{value to be evaluated}
+
+\item{df}{degrees of freedom}
+
+\item{n}{number of random numbers}
+
+\item{plot}{specifies whether a plot should be created or not}
+}
+\value{
+The probability that chi squared are larger than x
+}
+\description{
+This function calculates the probability chi squared is larger than the specified x value
+}
+\examples{
+chi.probability(4, df = 4, n = 2000)
+}
+\author{
+Nina Louise Pedersen \cr
+Institute of Mathematics and Computer Science (IMADA) \cr
+University of Sourthern Denmark, (SDU) \cr
+\email{npede14@student.sdu.dk} \cr
+}
+\keyword{chi}
+\keyword{probability}
 
